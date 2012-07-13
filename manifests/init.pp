@@ -23,19 +23,19 @@ class nginx {
   $nginx_includes = '/etc/nginx/includes'
   $nginx_conf = '/etc/nginx/conf.d'
 
-  $real_nginx_user = $::nginx_user ? {
+  $real_nginx_user = $nginx_user ? {
     undef   => 'www-data',
-    default => $::nginx_user
+    default => $nginx_user
   }
 
-  $real_nginx_worker_processes = $::nginx_worker_processes ? {
+  $real_nginx_worker_processes = $nginx_worker_processes ? {
     undef   => '1',
-    default => $::nginx_worker_processes
+    default => $nginx_worker_processes
   }
 
-  $real_nginx_worker_connections = $::nginx_worker_connections ? {
+  $real_nginx_worker_connections = $nginx_worker_connections ? {
     undef   => '1024',
-    default => $::nginx_worker_connections
+    default => $nginx_worker_connections
   }
 
   if ! defined(Package['nginx']) { package { 'nginx': ensure => installed }}
